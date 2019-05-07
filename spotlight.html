@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<style>
+  [g],
+  [y],
+  [r] {
+    background: gray;
+    width: 10vh;
+    height: 10vh;
+    margin: 10px auto;
+    border-radius: 50%;
+  }
+
+
+  [g].active {
+    background: greenyellow;
+  }
+  [y].active {
+    background: yellow;
+  }
+  [r].active {
+    background: red;
+  }
+</style>
+<body>
+  <button id="btn">start</button>
+
+  <section>
+      <div r></div>
+    <div y></div>
+    <div g></div>
+    
+  </section>
+</body>
+
+
+
+<script>
+  // g 3 sec
+  // y 2 sec
+    // red 6 sec
+
+
+  function timer(_time = 1000) {
+    return new Promise((res, rej) => {
+      setTimeout(res,_time);
+    });
+  }
+
+
+  function helperChColor(selector) {
+    const OldActive = document.querySelector('.active');
+    OldActive && OldActive.classList.remove('active');
+
+    if (selector) {
+      const active = document.querySelector(selector);
+      active && active.classList.add('active');
+    }
+    
+  }
+  btn.addEventListener('click', (e) => {
+    helperChColor('[r]');
+    timer(3000)
+    .then(() => {
+      helperChColor('[y]');
+      return timer(2000);
+    })
+    .then(()=> {
+      helperChColor('[g]');
+      return timer(6000);
+    })
+    .then(()=> {
+      helperChColor();
+    });
+  });
+  //   let _promise = timer(3000).then(() => {
+  //     console.log('ok', _promise);
+  //   }, () => {
+  //     console.log('error', _promise);
+  //   });
+  //   console.log(_promise);
+  // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // btn.onclick = function(e) {
+  //   console.log(e);
+  // }
+</script>
+
+</html>
